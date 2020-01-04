@@ -6,11 +6,24 @@ import { Error } from '../text-elements/index';
 import PlusMinus from '../plus-minus/PlusMinus';
 
 const Form = ({ className }) => {
-  const [nameValue, setNameValue] = useState('');
-  const [nameValid, setNameValid] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const [values, setValues] = useState([{ name: '', amount: '' }]);
+  // const [values, setValues] = useState([{ name: '', amount: '' }]);
+  // const [transferAmounts, setTransferAmounts] = useState([]);
+
+  const [values, setValues] = useState([
+    { name: 'Richard', amount: '100' },
+    { name: 'Smasher', amount: '60' }
+  ]);
+
+  const [transferAmounts, setTransferAmounts] = useState([
+    { name: 'Richard', amount: '100' },
+    { name: 'Smasher', amount: '60' }
+  ]);
+
+  useEffect(() => {
+    setTransferAmounts(values);
+  }, [values]);
 
   const onInput = (value, type, index) => {
     const valuesCopy = [...values];
@@ -26,22 +39,8 @@ const Form = ({ className }) => {
     }
   };
 
-  useEffect(() => {
-    if (nameValid === true) {
-      setErrorMessage(null);
-      // After doing all the checks for validy entries, you would do something (i.e. move to a new view)
-      console.log('All data valid');
-    }
-
-    if (nameValid === false) {
-      setErrorMessage('Please enter your name');
-    }
-  }, [nameValid]);
-
   const renderRows = () => {
     return values.map((entry, index) => {
-      // console.log(values);
-      // debugger;
       return (
         <>
           <Row>
@@ -63,11 +62,27 @@ const Form = ({ className }) => {
   };
 
   const handleSplit = () => {
-    if (nameValue === '') {
-      setNameValid(false);
-    } else if (nameValue !== '') {
-      setNameValid(true);
+    const transferAmountsCopy = [...transferAmounts];
+
+    for (let value of transferAmountsCopy) {
+      value.amount = parseInt(value.amount);
     }
+
+    transferAmountsCopy.forEach((value) => {
+      const currentValueIndex = transferAmountsCopy.indexOf(value);
+      const nextValueIndex = currentValueIndex + 1;
+
+      if (transferAmountsCopy[nextValueIndex]) {
+        const currentAmount = value.amount;
+        const nextAmount = transferAmountsCopy[nextValueIndex].amount;
+        if (currentAmount - nextAmount > 0) {
+          debugger;
+        } else if (currentAmount - nextAmount < 0) {
+        }
+      }
+    });
+
+    // debugger;
   };
 
   const handleMinusClick = (index) => {
@@ -85,7 +100,7 @@ const Form = ({ className }) => {
   return (
     <Wrapper className={className}>
       <FormComponent onSubmit={(event) => event.preventDefault()}>{renderRows()}</FormComponent>
-      <ErrorComponent>{errorMessage}</ErrorComponent>
+      {/* <ErrorComponent>{errorMessage}</ErrorComponent> */}
       <PrimaryCta onClick={handleSplit}>Split</PrimaryCta>
     </Wrapper>
   );

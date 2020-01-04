@@ -17,7 +17,7 @@ const TextInput = ({ type, onInput, value, index }) => {
         case 'name':
           return 'Name';
         case 'amount':
-          return '£ spent';
+          return '£';
       }
     }
   };
