@@ -73,9 +73,11 @@ const Form = ({ className }) => {
       const nextValueIndex = currentValueIndex + 1;
 
       if (transferAmountsCopy[nextValueIndex]) {
-        const currentAmount = value.amount;
-        const nextAmount = transferAmountsCopy[nextValueIndex].amount;
+        let currentAmount = value.amount;
+        let nextAmount = transferAmountsCopy[nextValueIndex].amount;
         if (currentAmount - nextAmount > 0) {
+          let difference = currentAmount - nextAmount;
+          nextAmount = nextAmount + difference;
           debugger;
         } else if (currentAmount - nextAmount < 0) {
         }
