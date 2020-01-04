@@ -6,7 +6,7 @@ import { Body } from '../../text-elements/index';
 import Colors from '../../../consts/Colors';
 import Devices from '../../../consts/Devices';
 
-const TextInput = ({ type, onInput, value }) => {
+const TextInput = ({ type, onInput, value, index }) => {
   const [focus, setFocus] = useState(false);
 
   const typeParser = (focus) => {
@@ -23,14 +23,14 @@ const TextInput = ({ type, onInput, value }) => {
   };
 
   const onTextInputChange = (el) => {
-    onInput(el.target.value, type);
+    onInput(el.target.value, type, index);
   };
 
   return (
     <Wrapper name={type} focus={focus} value={value}>
       <Input
         autoComplete="off"
-        type={'text'}
+        type={type === 'name' ? 'text' : 'number'}
         name={type}
         value={value}
         onChange={onTextInputChange}

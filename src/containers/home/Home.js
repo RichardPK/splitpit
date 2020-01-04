@@ -13,20 +13,15 @@ import {
   BodySmall,
   Caption
 } from '../../components/text-elements';
-import { ReactComponent as HandLogo } from '../../assets/svgs/makers-gonna-make-badge/hand-icon.svg';
-import Error from '../../components/text-elements/error/Error';
 import Form from '../../components/form/Form';
 import Image from '../../components/image/Image';
-import NeuImageFile from '../../assets/images/neu.jpg';
 import Anims from '../../consts/Anims';
 import ImagePreloader from '../../utils/image-preloader/ImagePreloader';
 
 function Home() {
-  const preloaded = ImagePreloader(NeuImageFile);
-
   return (
     <HomeWrapper>
-      <Heading1TextComp>The split pit</Heading1TextComp>
+      <Heading1TextComp>The Split Pit</Heading1TextComp>
       <FormComponent />
     </HomeWrapper>
   );
@@ -35,7 +30,7 @@ function Home() {
 const HomeWrapper = styled.div`
   ${StylePrefabs.pageWrapper}
   ${StylePrefabs.fullHeight}
-  ${Anims.fadeIn('1')};
+  ${Anims.fadeIn('2')};
 `;
 
 const FormComponent = styled(Form)`

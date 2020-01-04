@@ -9,10 +9,18 @@ const Form = ({ className }) => {
   const [nameValid, setNameValid] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const onInput = (value, type) => {
+  const [values, setValues] = useState([{ name: '', amount: '' }]);
+
+  const onInput = (value, type, index) => {
+    const valuesCopy = [...values];
     switch (type) {
       case 'name':
-        setNameValue(value);
+        valuesCopy[index].name = value;
+        setValues(valuesCopy);
+        break;
+      case 'amount':
+        valuesCopy[index].amount = value;
+        setValues(valuesCopy);
         break;
     }
   };
@@ -29,7 +37,20 @@ const Form = ({ className }) => {
     }
   }, [nameValid]);
 
-  const split = () => {
+  const renderRows = () => {
+    console.log(values);
+
+    return values.map((entry, index) => {
+      return (
+        <Row key={index}>
+          <TextInput type={'name'} onInput={onInput} value={entry.name} index={index} />
+          <TextInput type={'amount'} onInput={onInput} value={entry.amount} index={index} />
+        </Row>
+      );
+    });
+  };
+
+  const handleSplit = () => {
     if (nameValue === '') {
       setNameValid(false);
     } else if (nameValue !== '') {
@@ -39,14 +60,9 @@ const Form = ({ className }) => {
 
   return (
     <Wrapper className={className}>
-      <FormComponent onSubmit={(event) => event.preventDefault()}>
-        <Row>
-          <TextInput type={'name'} onInput={onInput} value={nameValue} />
-          <TextInput type={'amount'} onInput={onInput} value={nameValue} />
-        </Row>
-      </FormComponent>
+      <FormComponent onSubmit={(event) => event.preventDefault()}>{renderRows()}</FormComponent>
       <ErrorComponent>{errorMessage}</ErrorComponent>
-      <PrimaryCta onClick={split}>Split</PrimaryCta>
+      <PrimaryCta onClick={handleSplit}>Split</PrimaryCta>
     </Wrapper>
   );
 };

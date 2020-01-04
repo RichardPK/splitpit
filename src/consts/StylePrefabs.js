@@ -20,8 +20,8 @@ export default {
   // vh calc - padding - margins
   fullHeight: `
   @media ${Devices.laptop}{
-    min-height: calc(var(--vh, 1vh) * 100)
+    min-height: calc(var(--vh, 1vh) * 100);
   }
-  min-height: calc(var(--vh, 1vh) * 100)
+  min-height: calc(var(--vh, 1vh) * 100);
 `
 };
