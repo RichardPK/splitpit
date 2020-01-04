@@ -55,7 +55,7 @@ const Wrapper = styled.div`
 
   width: ${(props) => (props.name === 'name' ? '100%' : '30%')};
   border-radius: 5px;
-  margin: 0 1rem 1rem;
+  margin: 0 0.75rem 1rem;
   padding: 17px 12px 15px 12px;
   overflow: hidden;
   border: 1px solid ${Colors.black};
@@ -82,7 +82,7 @@ const Input = styled.input`
 const Placeholder = styled(Body)`
   position: absolute;
   margin-bottom: 5px;
-  color: ${(props) => (props.name === 'name' ? Colors.black + `80` : Colors.white + `80`)};
+  color: ${(props) => (props.name === 'name' ? Colors.black + `80` : Colors.white + `90`)};
   transition: all 0.2s;
   pointer-events: none;
 
