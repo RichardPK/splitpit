@@ -29,11 +29,7 @@ const Form = ({ className }) => {
     }
   }, [nameValid]);
 
-  const validateFields = () => {
-    // Email regex if required
-    // let emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    // let emailMatch = email.match(emailRegex);
-
+  const split = () => {
     if (nameValue === '') {
       setNameValid(false);
     } else if (nameValue !== '') {
@@ -50,7 +46,7 @@ const Form = ({ className }) => {
         </Row>
       </FormComponent>
       <ErrorComponent>{errorMessage}</ErrorComponent>
-      <PrimaryCta onClick={validateFields}>Submit</PrimaryCta>
+      <PrimaryCta onClick={split}>Split</PrimaryCta>
     </Wrapper>
   );
 };
@@ -68,7 +64,7 @@ const ErrorComponent = styled(Error)`
 
 const FormComponent = styled.form`
   width: 100%;
-  max-width: 900px;
+  max-width: 750px;
   margin-bottom: 1rem;
 `;
 

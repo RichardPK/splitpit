@@ -36,7 +36,6 @@ const HomeWrapper = styled.div`
   ${StylePrefabs.pageWrapper}
   ${StylePrefabs.fullHeight}
   ${Anims.fadeIn('1')};
-  background-color: tomato;
 `;
 
 const FormComponent = styled(Form)`

@@ -17,7 +17,7 @@ const TextInput = ({ type, onInput, value }) => {
         case 'name':
           return 'Name';
         case 'amount':
-          return 'Amount spent';
+          return '£ spent';
       }
     }
   };
@@ -27,7 +27,7 @@ const TextInput = ({ type, onInput, value }) => {
   };
 
   return (
-    <Wrapper focus={focus} value={value}>
+    <Wrapper name={type} focus={focus} value={value}>
       <Input
         autoComplete="off"
         type={'text'}
@@ -38,7 +38,9 @@ const TextInput = ({ type, onInput, value }) => {
         onBlur={() => setFocus(false)}
       />
       {value === '' ? (
-        <Placeholder focus={focus}>{typeParser()}</Placeholder>
+        <Placeholder name={type} focus={focus}>
+          {typeParser()}
+        </Placeholder>
       ) : (
         <StaticPlaceholder focus={focus}>{typeParser()}</StaticPlaceholder>
       )}
@@ -50,12 +52,15 @@ const Wrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 100%;
+
+  width: ${(props) => (props.name === 'name' ? '100%' : '30%')};
   border-radius: 5px;
-  margin-bottom: 1rem;
+  margin: 0 1rem 1rem;
   padding: 17px 12px 15px 12px;
   overflow: hidden;
-  background-color: ${Colors.white};
+  border: 1px solid ${Colors.black};
+  background-color: ${(props) => (props.name === 'name' ? Colors.white : Colors.black)};
+  color: ${(props) => (props.name === 'name' ? Colors.black : Colors.white)};
   box-shadow: ${(props) => (props.focus ? StylePrefabs.boxShadow : null)};
   padding: ${(props) =>
     props.focus || props.value !== '' ? `23px 12px 9px 12px` : '17px 12px 15px 12px'};
@@ -69,13 +74,15 @@ const Input = styled.input`
   border-style: none;
   outline: none;
   width: 100%;
+  background-color: ${(props) => (props.name === 'name' ? Colors.white : Colors.black)};
+  color: ${(props) => (props.name === 'name' ? Colors.black : Colors.white)};
   ${Typography.genericStyles.body}
 `;
 
 const Placeholder = styled(Body)`
   position: absolute;
   margin-bottom: 5px;
-  color: ${Colors.black}80;
+  color: ${(props) => (props.name === 'name' ? Colors.black + `80` : Colors.white + `80`)};
   transition: all 0.2s;
   pointer-events: none;
 

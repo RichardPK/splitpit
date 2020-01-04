@@ -48,7 +48,7 @@ const modularScaleDesktop = {
     lineHeight: TypographyUtils.convertPixelToEm(28)
   },
   cta: {
-    fontSize: TypographyUtils.convertPixelToEm(18),
+    fontSize: TypographyUtils.convertPixelToEm(20),
     lineHeight: TypographyUtils.convertPixelToEm(24)
   },
   body: {
@@ -87,8 +87,8 @@ const modularScaleMobile = {
     lineHeight: TypographyUtils.convertPixelToEm(26)
   },
   cta: {
-    fontSize: TypographyUtils.convertPixelToEm(16),
-    lineHeight: TypographyUtils.convertPixelToEm(22)
+    fontSize: TypographyUtils.convertPixelToEm(18),
+    lineHeight: TypographyUtils.convertPixelToEm(24)
   },
   body: {
     fontSize: TypographyUtils.convertPixelToEm(16),
