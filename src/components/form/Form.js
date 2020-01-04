@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 import TextInput from './text-input/TextInput';
 import { PrimaryCta } from '../ctas/index';
 import { Error } from '../text-elements/index';
+import PlusMinus from '../plus-minus/PlusMinus';
 
 const Form = ({ className }) => {
   const [nameValue, setNameValue] = useState('');
@@ -39,12 +40,12 @@ const Form = ({ className }) => {
 
   const renderRows = () => {
     console.log(values);
-
     return values.map((entry, index) => {
       return (
         <Row key={index}>
           <TextInput type={'name'} onInput={onInput} value={entry.name} index={index} />
           <TextInput type={'amount'} onInput={onInput} value={entry.amount} index={index} />
+          {index > 0 ? <Minus onClick={() => handleMinusClick(index)} /> : null}
         </Row>
       );
     });
@@ -56,6 +57,12 @@ const Form = ({ className }) => {
     } else if (nameValue !== '') {
       setNameValid(true);
     }
+  };
+
+  const handleMinusClick = (index) => {
+    const valuesCopy = [...values];
+    valuesCopy.splice(index, 1);
+    setValues(valuesCopy);
   };
 
   return (
@@ -86,6 +93,11 @@ const FormComponent = styled.form`
 
 const Row = styled.div`
   display: flex;
+  align-items: center;
+`;
+
+const Minus = styled(PlusMinus)`
+  margin-left: 1rem;
 `;
 
 export default Form;

@@ -42,7 +42,9 @@ const TextInput = ({ type, onInput, value, index }) => {
           {typeParser()}
         </Placeholder>
       ) : (
-        <StaticPlaceholder focus={focus}>{typeParser()}</StaticPlaceholder>
+        <StaticPlaceholder name={type} focus={focus}>
+          {typeParser()}
+        </StaticPlaceholder>
       )}
     </Wrapper>
   );
@@ -55,7 +57,7 @@ const Wrapper = styled.div`
 
   width: ${(props) => (props.name === 'name' ? '100%' : '30%')};
   border-radius: 5px;
-  margin: 0 0.75rem 1rem;
+  margin: 0.5rem 0.75rem;
   padding: 17px 12px 15px 12px;
   overflow: hidden;
   border: 1px solid ${Colors.black};
@@ -101,7 +103,7 @@ const StaticPlaceholder = styled(Body)`
   margin-bottom: 5px;
   top: 3px;
   left: 12px;
-  color: ${Colors.black}80;
+  color: ${(props) => (props.name === 'name' ? Colors.black + `80` : Colors.white + `90`)};
   font-size: 8px;
   pointer-events: none;
 `;
