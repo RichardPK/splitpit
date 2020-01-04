@@ -39,11 +39,12 @@ const Form = ({ className }) => {
   }, [nameValid]);
 
   const renderRows = () => {
-    console.log(values);
     return values.map((entry, index) => {
+      // console.log(values);
+      // debugger;
       return (
         <>
-          <Row key={index}>
+          <Row>
             <Plus collapsed={true} onClick={() => handlePlusClick(index)} hidden={true} />
             <TextInput type={'name'} onInput={onInput} value={entry.name} index={index} />
             <TextInput type={'amount'} onInput={onInput} value={entry.amount} index={index} />
@@ -53,7 +54,7 @@ const Form = ({ className }) => {
               <Minus hidden={true} />
             )}
           </Row>
-          <Row key={index} hidden={index > values.length}>
+          <Row hidden={index + 1 !== values.length}>
             <Plus collapsed={true} onClick={() => handlePlusClick(index)} />
           </Row>
         </>
