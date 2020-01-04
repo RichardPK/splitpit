@@ -68,21 +68,25 @@ const Form = ({ className }) => {
       value.amount = parseInt(value.amount);
     }
 
-    transferAmountsCopy.forEach((value) => {
-      const currentValueIndex = transferAmountsCopy.indexOf(value);
-      const nextValueIndex = currentValueIndex + 1;
+    // THIS IS TOTAL SHIT (I think, maybe not):
+    // Start by adding all the amounts up, divide it by the number of people and then figure out how far away each person is.
+    // Then start distributing the difference to each person
 
-      if (transferAmountsCopy[nextValueIndex]) {
-        let currentAmount = value.amount;
-        let nextAmount = transferAmountsCopy[nextValueIndex].amount;
-        if (currentAmount - nextAmount > 0) {
-          let difference = currentAmount - nextAmount;
-          nextAmount = nextAmount + difference;
-          debugger;
-        } else if (currentAmount - nextAmount < 0) {
-        }
-      }
-    });
+    //     transferAmountsCopy.forEach((value) => {
+    //       const currentValueIndex = transferAmountsCopy.indexOf(value);
+    //       const nextValueIndex = currentValueIndex + 1;
+    // tr
+    //       if (transferAmountsCopy[nextValueIndex]) {
+    //         let currentAmount = value.amount;
+    //         let nextAmount = transferAmountsCopy[nextValueIndex].amount;
+    //         if (currentAmount - nextAmount > 0) {
+    //           let difference = currentAmount - nextAmount;
+    //           nextAmount = nextAmount + difference;
+    //           debugger;
+    //         } else if (currentAmount - nextAmount < 0) {
+    //         }
+    //       }
+    //     });
 
     // debugger;
   };
