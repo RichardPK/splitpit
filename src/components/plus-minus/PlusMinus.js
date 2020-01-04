@@ -1,11 +1,20 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components/macro';
 
-const PlusMinusComp = ({ onClick, className, collapsed }) => {
-  return <PlusMinus onClick={onClick} className={className} collapsed={collapsed} />;
+const PlusMinusComp = ({ onClick, className, collapsed, hidden }) => {
+  return (
+    <Wrapper onClick={onClick}>
+      <PlusMinus className={className} collapsed={collapsed} hidden={hidden} />
+    </Wrapper>
+  );
 };
 
+const Wrapper = styled.div`
+  padding: 1rem;
+`;
+
 const PlusMinus = styled.div`
+  visibility: ${(props) => (props.hidden ? 'hidden' : 'default')};
   display: flex;
   justify-content: center;
   align-items: center;

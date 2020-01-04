@@ -42,11 +42,21 @@ const Form = ({ className }) => {
     console.log(values);
     return values.map((entry, index) => {
       return (
-        <Row key={index}>
-          <TextInput type={'name'} onInput={onInput} value={entry.name} index={index} />
-          <TextInput type={'amount'} onInput={onInput} value={entry.amount} index={index} />
-          {index > 0 ? <Minus onClick={() => handleMinusClick(index)} /> : null}
-        </Row>
+        <>
+          <Row key={index}>
+            <Plus collapsed={true} onClick={() => handlePlusClick(index)} hidden={true} />
+            <TextInput type={'name'} onInput={onInput} value={entry.name} index={index} />
+            <TextInput type={'amount'} onInput={onInput} value={entry.amount} index={index} />
+            {index > 0 ? (
+              <Minus onClick={() => handleMinusClick(index)} />
+            ) : (
+              <Minus hidden={true} />
+            )}
+          </Row>
+          <Row key={index} hidden={index > values.length}>
+            <Plus collapsed={true} onClick={() => handlePlusClick(index)} />
+          </Row>
+        </>
       );
     });
   };
@@ -62,6 +72,12 @@ const Form = ({ className }) => {
   const handleMinusClick = (index) => {
     const valuesCopy = [...values];
     valuesCopy.splice(index, 1);
+    setValues(valuesCopy);
+  };
+
+  const handlePlusClick = (index) => {
+    const valuesCopy = [...values];
+    valuesCopy.push({ name: '', amount: '' });
     setValues(valuesCopy);
   };
 
@@ -92,12 +108,18 @@ const FormComponent = styled.form`
 `;
 
 const Row = styled.div`
-  display: flex;
+  display: ${(props) => (props.hidden ? 'none' : 'flex')};
   align-items: center;
+  margin: 0.5rem;
+  min-height: 56px;
 `;
 
 const Minus = styled(PlusMinus)`
   margin-left: 1rem;
+`;
+
+const Plus = styled(PlusMinus)`
+  margin-right: 1rem;
 `;
 
 export default Form;
