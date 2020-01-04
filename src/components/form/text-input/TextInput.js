@@ -15,7 +15,9 @@ const TextInput = ({ type, onInput, value }) => {
     } else {
       switch (type) {
         case 'name':
-          return 'Your full name *';
+          return 'Name';
+        case 'amount':
+          return 'Amount spent';
       }
     }
   };

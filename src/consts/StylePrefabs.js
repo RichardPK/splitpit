@@ -16,16 +16,12 @@ export default {
   }
   padding-top: 1rem;
   position: relative;
-  margin: 1rem;
-  width: calc(100% - 2rem);
 `,
   // vh calc - padding - margins
-  fullHeightDesktop: `
-  min-height: calc(var(--vh, 1vh) * 100 - 4rem - 2rem)
+  fullHeight: `
+  @media ${Devices.laptop}{
+    min-height: calc(var(--vh, 1vh) * 100)
   }
-`,
-
-  fullHeightMobile: `
-  min-height: calc(var(--vh, 1vh) * 100 - 1rem - 2rem)
+  min-height: calc(var(--vh, 1vh) * 100)
 `
 };

@@ -17,38 +17,34 @@ import { ReactComponent as HandLogo } from '../../assets/svgs/makers-gonna-make-
 import Error from '../../components/text-elements/error/Error';
 import Form from '../../components/form/Form';
 import Image from '../../components/image/Image';
+import NeuImageFile from '../../assets/images/neu.jpg';
 import Anims from '../../consts/Anims';
 import ImagePreloader from '../../utils/image-preloader/ImagePreloader';
 
 function Home() {
-  return <HomeWrapper></HomeWrapper>;
+  const preloaded = ImagePreloader(NeuImageFile);
+
+  return (
+    <HomeWrapper>
+      <Heading1TextComp>The split pit</Heading1TextComp>
+      <FormComponent />
+    </HomeWrapper>
+  );
 }
 
 const HomeWrapper = styled.div`
   ${StylePrefabs.pageWrapper}
-  ${StylePrefabs.fullHeightDesktop}
-  ${Anims.fadeIn('.5')};
+  ${StylePrefabs.fullHeight}
+  ${Anims.fadeIn('1')};
+  background-color: tomato;
 `;
 
 const FormComponent = styled(Form)`
   padding: 2rem 0;
 `;
 
-const TypeWrapper = styled.div`
-  padding: 2rem 0;
-`;
-
-const Heading1TextComp = styled(Heading1)``;
-
-const HandWrapper = styled.div`
-  svg {
-    width: 4em;
-    height: auto;
-
-    path {
-      fill: ${Colors.black};
-    }
-  }
+const Heading1TextComp = styled(Heading1)`
+  text-align: center;
 `;
 
 export default Home;

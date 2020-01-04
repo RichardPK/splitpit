@@ -44,7 +44,10 @@ const Form = ({ className }) => {
   return (
     <Wrapper className={className}>
       <FormComponent onSubmit={(event) => event.preventDefault()}>
-        <TextInput type={'name'} onInput={onInput} value={nameValue} />
+        <Row>
+          <TextInput type={'name'} onInput={onInput} value={nameValue} />
+          <TextInput type={'amount'} onInput={onInput} value={nameValue} />
+        </Row>
       </FormComponent>
       <ErrorComponent>{errorMessage}</ErrorComponent>
       <PrimaryCta onClick={validateFields}>Submit</PrimaryCta>
@@ -52,7 +55,12 @@ const Form = ({ className }) => {
   );
 };
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 const ErrorComponent = styled(Error)`
   text-align: center;
@@ -62,10 +70,10 @@ const FormComponent = styled.form`
   width: 100%;
   max-width: 900px;
   margin-bottom: 1rem;
+`;
+
+const Row = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `;
 
 export default Form;
