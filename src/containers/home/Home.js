@@ -22,6 +22,7 @@ function Home() {
   return (
     <HomeWrapper>
       <Heading1TextComp>The Split Pit</Heading1TextComp>
+      <BodySmallComp>Shove some sh*t in the pit and watch it split</BodySmallComp>
       <FormComponent />
     </HomeWrapper>
   );
@@ -38,6 +39,10 @@ const FormComponent = styled(Form)`
 `;
 
 const Heading1TextComp = styled(Heading1)`
+  text-align: center;
+`;
+
+const BodySmallComp = styled(BodySmall)`
   text-align: center;
 `;
 

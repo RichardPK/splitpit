@@ -8,34 +8,41 @@ import PlusMinus from '../plus-minus/PlusMinus';
 const Form = ({ className }) => {
   const [errorMessage, setErrorMessage] = useState('');
 
-  const [values, setValues] = useState([
-    { name: 'Abelomai', amount: '183.78' },
-    { name: 'Mamta', amount: `169.43` },
-    { name: 'Ali', amount: `150.59` },
-    { name: 'Batson', amount: `30` },
-    { name: 'Smasher', amount: `36` },
-    { name: 'Scott', amount: `29` },
-    { name: 'Richard', amount: `160.88` },
-    { name: 'Nuria', amount: `0` },
-    { name: 'Helen', amount: `0` },
-    { name: 'Andrew', amount: `0` },
-    { name: 'Joe', amount: `0` },
-    { name: 'Jack', amount: `0` }
-  ]);
+  // const [values, setValues] = useState([
+  //   { name: 'Abelomai', amount: '183.78' },
+  //   { name: 'Mamta', amount: `169.43` },
+  //   { name: 'Ali', amount: `150.59` },
+  //   { name: 'Batson', amount: `30` },
+  //   { name: 'Smasher', amount: `36` },
+  //   { name: 'Scott', amount: `29` },
+  //   { name: 'Richard', amount: `160.88` },
+  //   { name: 'Nuria', amount: `0` },
+  //   { name: 'Helen', amount: `0` },
+  //   { name: 'Andrew', amount: `0` },
+  //   { name: 'Joe', amount: `0` },
+  //   { name: 'Jack', amount: `0` }
+  // ]);
+
+  // const [mutableValues, setMutableValues] = useState([
+  //   { name: 'Abelomai', amount: '183.78' },
+  //   { name: 'Mamta', amount: `169.43` },
+  //   { name: 'Ali', amount: `150.59` },
+  //   { name: 'Batson', amount: `30` },
+  //   { name: 'Smasher', amount: `36` },
+  //   { name: 'Scott', amount: `29` },
+  //   { name: 'Richard', amount: `160.88` },
+  //   { name: 'Nuria', amount: `0` },
+  //   { name: 'Helen', amount: `0` },
+  //   { name: 'Andrew', amount: `0` },
+  //   { name: 'Joe', amount: `0` },
+  //   { name: 'Jack', amount: `0` }
+  // ]);
+
+  const [values, setValues] = useState([{ name: '', amount: null }, { name: '', amount: null }]);
 
   const [mutableValues, setMutableValues] = useState([
-    { name: 'Abelomai', amount: '183.78' },
-    { name: 'Mamta', amount: `169.43` },
-    { name: 'Ali', amount: `150.59` },
-    { name: 'Batson', amount: `30` },
-    { name: 'Smasher', amount: `36` },
-    { name: 'Scott', amount: `29` },
-    { name: 'Richard', amount: `160.88` },
-    { name: 'Nuria', amount: `0` },
-    { name: 'Helen', amount: `0` },
-    { name: 'Andrew', amount: `0` },
-    { name: 'Joe', amount: `0` },
-    { name: 'Jack', amount: `0` }
+    { name: '', amount: null },
+    { name: '', amount: null }
   ]);
 
   const [transferSentences, setTransferSentences] = useState([]);
