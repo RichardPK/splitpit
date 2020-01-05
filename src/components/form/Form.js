@@ -45,8 +45,8 @@ const Form = ({ className }) => {
   };
 
   const renderRows = () => {
-    console.log(values);
-    console.log(mutableValues);
+    // console.log(`values: ${values}`);
+    // console.log(`mutable: ${mutableValues}`);
     return values.map((entry, index) => {
       return (
         <>
@@ -92,39 +92,43 @@ const Form = ({ className }) => {
     }
 
     for (let debtor of debtors) {
-      for (let creditor of creditors) {
-        while (debtor.amount < average) {
-          let debtorDifference = average - debtor.amount;
-          let creditorDifference = creditor.amount - average;
-          if (creditor.amount > average) {
-            if (creditorDifference > debtorDifference) {
-              debtor.amount += debtorDifference;
-              creditor.amount -= debtorDifference;
-              transferAmounts.push({
-                from: debtor.name,
-                to: creditor.name,
-                amount: debtorDifference
-              });
-            } else {
-              debtor.amount += creditorDifference;
-              creditor.amount -= creditorDifference;
-              transferAmounts.push({
-                from: debtor.name,
-                to: creditor.name,
-                amount: creditorDifference
-              });
+      if (debtor.name) {
+        for (let creditor of creditors) {
+          if (creditor.name) {
+            while (debtor.amount < average) {
+              let debtorDifference = average - debtor.amount;
+              let creditorDifference = creditor.amount - average;
+              if (creditor.amount > average) {
+                if (creditorDifference > debtorDifference) {
+                  debtor.amount += debtorDifference;
+                  creditor.amount -= debtorDifference;
+                  transferAmounts.push({
+                    from: debtor.name,
+                    to: creditor.name,
+                    amount: debtorDifference
+                  });
+                } else {
+                  debtor.amount += creditorDifference;
+                  creditor.amount -= creditorDifference;
+                  transferAmounts.push({
+                    from: debtor.name,
+                    to: creditor.name,
+                    amount: creditorDifference
+                  });
+                }
+              } else {
+                debtor.amount += debtorDifference;
+                creditor.amount -= debtorDifference;
+                transferAmounts.push({
+                  from: debtor.name,
+                  to: creditor.name,
+                  amount: debtorDifference
+                });
+              }
+              if (creditor.amount === average) {
+                break;
+              }
             }
-          } else {
-            debtor.amount += debtorDifference;
-            creditor.amount -= debtorDifference;
-            transferAmounts.push({
-              from: debtor.name,
-              to: creditor.name,
-              amount: debtorDifference
-            });
-          }
-          if (creditor.amount === average) {
-            break;
           }
         }
       }
@@ -134,12 +138,16 @@ const Form = ({ className }) => {
 
   const calcAverage = (values) => {
     let total = 0;
+    let numValues = 0;
 
     for (let value of values) {
-      total += value.amount;
+      if (value.amount !== NaN) {
+        total += value.amount;
+        numValues++;
+      }
     }
 
-    return total / values.length;
+    return total / numValues;
   };
 
   const handleMinusClick = (index) => {
@@ -150,7 +158,7 @@ const Form = ({ className }) => {
 
   const handlePlusClick = (index) => {
     const valuesCopy = [...values];
-    valuesCopy.push({ name: '', amount: '' });
+    valuesCopy.push({ name: '', amount: null });
     setValues(valuesCopy);
   };
 
