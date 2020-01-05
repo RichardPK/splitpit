@@ -26,6 +26,11 @@ const TextInput = ({ type, onInput, value, index }) => {
     onInput(el.target.value, type, index);
   };
 
+  // if (type === 'amount') {
+  //   console.log(value);
+  //   debugger;
+  // }
+
   return (
     <Wrapper name={type} focus={focus} value={value}>
       <Input

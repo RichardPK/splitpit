@@ -8,20 +8,11 @@ import PlusMinus from '../plus-minus/PlusMinus';
 const Form = ({ className }) => {
   const [errorMessage, setErrorMessage] = useState('');
 
-  const [values, setValues] = useState([
-    { name: 'Richard', amount: '100' },
-    { name: 'Smasher', amount: '60' },
-    { name: 'Nuria', amount: '40' },
-    { name: 'Ali', amount: '0' },
-    { name: 'Andrew', amount: '0' }
-  ]);
+  const [values, setValues] = useState([{ name: '', amount: null }, { name: '', amount: null }]);
 
   const [mutableValues, setMutableValues] = useState([
-    { name: 'Richard', amount: '100' },
-    { name: 'Smasher', amount: '60' },
-    { name: 'Nuria', amount: '40' },
-    { name: 'Ali', amount: '0' },
-    { name: 'Andrew', amount: '0' }
+    { name: '', amount: null },
+    { name: '', amount: null }
   ]);
 
   const [transferSentences, setTransferSentences] = useState([]);
