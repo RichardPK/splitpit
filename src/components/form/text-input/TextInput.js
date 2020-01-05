@@ -37,7 +37,7 @@ const TextInput = ({ type, onInput, value, index }) => {
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
       />
-      {value === '' ? (
+      {value === '' || value === null ? (
         <Placeholder name={type} focus={focus}>
           {typeParser()}
         </Placeholder>
