@@ -59,10 +59,13 @@ const Wrapper = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
-
   width: ${(props) => (props.name === 'name' ? '100%' : '30%')};
   border-radius: 5px;
-  margin: 0 0.75rem;
+  margin: 0 0.25rem;
+  @media ${Devices.mobileL} {
+    margin: 0 0.75rem;
+  }
+
   padding: 17px 12px 15px 12px;
   overflow: hidden;
   border: 1px solid ${Colors.black};

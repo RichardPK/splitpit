@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components/macro';
+import Devices from '../../consts/Devices';
 
 const PlusMinusComp = ({ onClick, className, collapsed, hidden }) => {
   return (
@@ -10,7 +11,10 @@ const PlusMinusComp = ({ onClick, className, collapsed, hidden }) => {
 };
 
 const Wrapper = styled.div`
-  padding: 1rem;
+  padding: 0.1rem;
+  @media ${Devices.mobileL} {
+    padding: 1rem;
+  }
 `;
 
 const PlusMinus = styled.div`

@@ -4,6 +4,7 @@ import TextInput from './text-input/TextInput';
 import { PrimaryCta } from '../ctas/index';
 import { Error, Body } from '../text-elements/index';
 import PlusMinus from '../plus-minus/PlusMinus';
+import Devices from '../../consts/Devices';
 
 const Form = ({ className }) => {
   const [errorMessage, setErrorMessage] = useState('');
@@ -225,16 +226,28 @@ const FormComponent = styled.form`
 const Row = styled.div`
   display: ${(props) => (props.hidden ? 'none' : 'flex')};
   align-items: center;
-  margin: 0.5rem;
+  margin: 0.5rem 1rem;
   min-height: 56px;
+
+  @media ${Devices.mobileL} {
+    margin: 0.5rem;
+  }
 `;
 
 const Minus = styled(PlusMinus)`
-  margin-left: 1rem;
+  margin-left: 0.25rem;
+
+  @media ${Devices.mobileL} {
+    margin-left: 1rem;
+  }
 `;
 
 const Plus = styled(PlusMinus)`
-  margin-right: 1rem;
+  margin-right: 0.25rem;
+
+  @media ${Devices.mobileL} {
+    margin-right: 1rem;
+  }
 `;
 
 const SentenceWrapper = styled.div`
