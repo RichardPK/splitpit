@@ -22,7 +22,7 @@ function Home() {
   return (
     <HomeWrapper>
       <Heading1TextComp>The Split Pit</Heading1TextComp>
-      <BodySmallComp>Shove some sh*t in the pit and watch it split</BodySmallComp>
+      <BodySmallComp>Shove some money in the pit and watch it split</BodySmallComp>
       <FormComponent />
     </HomeWrapper>
   );
