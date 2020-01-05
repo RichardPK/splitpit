@@ -30,7 +30,7 @@ function Home() {
 const HomeWrapper = styled.div`
   ${StylePrefabs.pageWrapper}
   ${StylePrefabs.fullHeight}
-  ${Anims.fadeIn('2')};
+  ${Anims.fadeIn('1')};
 `;
 
 const FormComponent = styled(Form)`

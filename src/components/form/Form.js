@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
 import TextInput from './text-input/TextInput';
 import { PrimaryCta } from '../ctas/index';
-import { Error } from '../text-elements/index';
+import { Error, Body } from '../text-elements/index';
 import PlusMinus from '../plus-minus/PlusMinus';
 
 const Form = ({ className }) => {
@@ -27,7 +27,7 @@ const Form = ({ className }) => {
     { name: 'Andrew', amount: '0' }
   ]);
 
-  const [transferAmounts, setTransferAmounts] = useState([{ from: '', to: '', amount: '' }]);
+  const [transferSentences, setTransferSentences] = useState([]);
 
   useEffect(() => {
     setMutableValues(mutableValues);
@@ -71,6 +71,7 @@ const Form = ({ className }) => {
 
   const handleSplit = () => {
     const mutableValuesCopy = [...mutableValues];
+    const transferAmounts = [];
     let creditors = [];
     let debtors = [];
     let neutrals = [];
@@ -93,39 +94,43 @@ const Form = ({ className }) => {
 
     for (let debtor of debtors) {
       for (let creditor of creditors) {
-        // let debtorIndex = debtors.indexOf(debtor);
-        // let creditorIndex = debtorIndex;
-        // let creditor = creditors[creditorIndex];
         while (debtor.amount < average) {
           let debtorDifference = average - debtor.amount;
           let creditorDifference = creditor.amount - average;
           if (creditor.amount > average) {
-            // debugger;
             if (creditorDifference > debtorDifference) {
               debtor.amount += debtorDifference;
               creditor.amount -= debtorDifference;
+              transferAmounts.push({
+                from: debtor.name,
+                to: creditor.name,
+                amount: debtorDifference
+              });
             } else {
               debtor.amount += creditorDifference;
               creditor.amount -= creditorDifference;
+              transferAmounts.push({
+                from: debtor.name,
+                to: creditor.name,
+                amount: creditorDifference
+              });
             }
           } else {
-            // creditorIndex++;
-            // creditor = creditors[creditorIndex];
-            if (creditorDifference > debtorDifference) {
-              debtor.amount += debtorDifference;
-              creditor.amount -= debtorDifference;
-            } else {
-              debtor.amount += creditorDifference;
-              creditor.amount -= creditorDifference;
-            }
+            debtor.amount += debtorDifference;
+            creditor.amount -= debtorDifference;
+            transferAmounts.push({
+              from: debtor.name,
+              to: creditor.name,
+              amount: debtorDifference
+            });
           }
           if (creditor.amount === average) {
             break;
           }
         }
-        debugger;
       }
     }
+    sentenceGenerator(transferAmounts);
   };
 
   const calcAverage = (values) => {
@@ -150,11 +155,27 @@ const Form = ({ className }) => {
     setValues(valuesCopy);
   };
 
+  const sentenceGenerator = (transferAmounts) => {
+    let sentenceArray = transferAmounts.map((transfer) => {
+      return `${transfer.from} sends £${transfer.amount} to ${transfer.to}`;
+    });
+
+    setTransferSentences(sentenceArray);
+  };
+
+  const renderTransferSentences = () => {
+    return transferSentences.map((sentence) => {
+      return <TransferSentence>{sentence}</TransferSentence>;
+    });
+  };
+
   return (
     <Wrapper className={className}>
       <FormComponent onSubmit={(event) => event.preventDefault()}>{renderRows()}</FormComponent>
-      {/* <ErrorComponent>{errorMessage}</ErrorComponent> */}
       <PrimaryCta onClick={handleSplit}>Split</PrimaryCta>
+      {transferSentences.length > 0 ? (
+        <SentenceWrapper>{renderTransferSentences()}</SentenceWrapper>
+      ) : null}
     </Wrapper>
   );
 };
@@ -190,5 +211,13 @@ const Minus = styled(PlusMinus)`
 const Plus = styled(PlusMinus)`
   margin-right: 1rem;
 `;
+
+const SentenceWrapper = styled.div`
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+`;
+
+const TransferSentence = styled(Body)``;
 
 export default Form;
