@@ -93,13 +93,38 @@ const Form = ({ className }) => {
 
     for (let debtor of debtors) {
       for (let creditor of creditors) {
+        // let debtorIndex = debtors.indexOf(debtor);
+        // let creditorIndex = debtorIndex;
+        // let creditor = creditors[creditorIndex];
         while (debtor.amount < average) {
           let debtorDifference = average - debtor.amount;
-          debtor.amount += debtorDifference;
-          creditor.amount -= debtorDifference;
+          let creditorDifference = creditor.amount - average;
+          if (creditor.amount > average) {
+            // debugger;
+            if (creditorDifference > debtorDifference) {
+              debtor.amount += debtorDifference;
+              creditor.amount -= debtorDifference;
+            } else {
+              debtor.amount += creditorDifference;
+              creditor.amount -= creditorDifference;
+            }
+          } else {
+            // creditorIndex++;
+            // creditor = creditors[creditorIndex];
+            if (creditorDifference > debtorDifference) {
+              debtor.amount += debtorDifference;
+              creditor.amount -= debtorDifference;
+            } else {
+              debtor.amount += creditorDifference;
+              creditor.amount -= creditorDifference;
+            }
+          }
+          if (creditor.amount === average) {
+            break;
+          }
         }
+        debugger;
       }
-      debugger;
     }
   };
 
