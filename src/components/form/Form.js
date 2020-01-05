@@ -8,9 +8,6 @@ import PlusMinus from '../plus-minus/PlusMinus';
 const Form = ({ className }) => {
   const [errorMessage, setErrorMessage] = useState('');
 
-  // const [values, setValues] = useState([{ name: '', amount: '' }]);
-  // const [transferAmounts, setTransferAmounts] = useState([]);
-
   const [values, setValues] = useState([
     { name: 'Richard', amount: '100' },
     { name: 'Smasher', amount: '60' },
@@ -30,7 +27,7 @@ const Form = ({ className }) => {
   const [transferSentences, setTransferSentences] = useState([]);
 
   useEffect(() => {
-    setMutableValues(mutableValues);
+    setMutableValues(values);
   }, [values]);
 
   const onInput = (value, type, index) => {
@@ -48,6 +45,8 @@ const Form = ({ className }) => {
   };
 
   const renderRows = () => {
+    console.log(values);
+    console.log(mutableValues);
     return values.map((entry, index) => {
       return (
         <>
