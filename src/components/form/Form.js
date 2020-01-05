@@ -76,7 +76,9 @@ const Form = ({ className }) => {
     let neutrals = [];
 
     for (let value of mutableValuesCopy) {
-      value.amount = parseInt(value.amount);
+      if (value.amount !== null) {
+        value.amount = parseInt(value.amount);
+      }
     }
 
     let average = calcAverage(mutableValuesCopy);
@@ -92,9 +94,9 @@ const Form = ({ className }) => {
     }
 
     for (let debtor of debtors) {
-      if (debtor.name) {
+      if (debtor.amount !== null) {
         for (let creditor of creditors) {
-          if (creditor.name) {
+          if (creditor.amount !== null) {
             while (debtor.amount < average) {
               let debtorDifference = average - debtor.amount;
               let creditorDifference = creditor.amount - average;
@@ -141,7 +143,7 @@ const Form = ({ className }) => {
     let numValues = 0;
 
     for (let value of values) {
-      if (value.amount !== NaN) {
+      if (value.amount !== null) {
         total += value.amount;
         numValues++;
       }
