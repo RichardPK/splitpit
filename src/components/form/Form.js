@@ -8,11 +8,34 @@ import PlusMinus from '../plus-minus/PlusMinus';
 const Form = ({ className }) => {
   const [errorMessage, setErrorMessage] = useState('');
 
-  const [values, setValues] = useState([{ name: '', amount: null }, { name: '', amount: null }]);
+  const [values, setValues] = useState([
+    { name: 'Abelomai', amount: '183.78' },
+    { name: 'Mamta', amount: `169.43` },
+    { name: 'Ali', amount: `150.59` },
+    { name: 'Batson', amount: `30` },
+    { name: 'Smasher', amount: `36` },
+    { name: 'Scott', amount: `29` },
+    { name: 'Richard', amount: `160.88` },
+    { name: 'Nuria', amount: `0` },
+    { name: 'Helen', amount: `0` },
+    { name: 'Andrew', amount: `0` },
+    { name: 'Joe', amount: `0` },
+    { name: 'Jack', amount: `0` }
+  ]);
 
   const [mutableValues, setMutableValues] = useState([
-    { name: '', amount: null },
-    { name: '', amount: null }
+    { name: 'Abelomai', amount: '183.78' },
+    { name: 'Mamta', amount: `169.43` },
+    { name: 'Ali', amount: `150.59` },
+    { name: 'Batson', amount: `30` },
+    { name: 'Smasher', amount: `36` },
+    { name: 'Scott', amount: `29` },
+    { name: 'Richard', amount: `160.88` },
+    { name: 'Nuria', amount: `0` },
+    { name: 'Helen', amount: `0` },
+    { name: 'Andrew', amount: `0` },
+    { name: 'Joe', amount: `0` },
+    { name: 'Jack', amount: `0` }
   ]);
 
   const [transferSentences, setTransferSentences] = useState([]);
@@ -68,11 +91,12 @@ const Form = ({ className }) => {
 
     for (let value of mutableValuesCopy) {
       if (value.amount !== null) {
-        value.amount = parseInt(value.amount);
+        value.amount = parseFloat(value.amount);
       }
     }
 
     let average = calcAverage(mutableValuesCopy);
+    average = parseFloat(average.toFixed(2));
 
     for (let value of mutableValuesCopy) {
       if (value.amount === average) {
@@ -109,22 +133,15 @@ const Form = ({ className }) => {
                     amount: creditorDifference
                   });
                 }
-              } else {
-                debtor.amount += debtorDifference;
-                creditor.amount -= debtorDifference;
-                transferAmounts.push({
-                  from: debtor.name,
-                  to: creditor.name,
-                  amount: debtorDifference
-                });
-              }
-              if (creditor.amount === average) {
+              } else if (creditor.amount === average) {
                 break;
               }
             }
           }
         }
       }
+
+      debugger;
     }
     sentenceGenerator(transferAmounts);
   };
