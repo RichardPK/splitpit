@@ -91,7 +91,16 @@ const Form = ({ className }) => {
       }
     }
 
-    debugger;
+    for (let debtor of debtors) {
+      for (let creditor of creditors) {
+        while (debtor.amount < average) {
+          let debtorDifference = average - debtor.amount;
+          debtor.amount += debtorDifference;
+          creditor.amount -= debtorDifference;
+        }
+      }
+      debugger;
+    }
   };
 
   const calcAverage = (values) => {
