@@ -83,6 +83,9 @@ const Form = ({ className }) => {
   };
 
   const handleSplit = () => {
+    setTimeout(() => {
+      window.scrollTo(0, document.body.scrollHeight);
+    }, 100);
     const mutableValuesCopy = [...mutableValues];
     const transferAmounts = [];
     let creditors = [];
@@ -140,8 +143,6 @@ const Form = ({ className }) => {
           }
         }
       }
-
-      debugger;
     }
     sentenceGenerator(transferAmounts);
   };
@@ -174,7 +175,7 @@ const Form = ({ className }) => {
 
   const sentenceGenerator = (transferAmounts) => {
     let sentenceArray = transferAmounts.map((transfer) => {
-      return `${transfer.from} sends £${transfer.amount} to ${transfer.to}`;
+      return `${transfer.from} sends £${transfer.amount.toFixed(2)} to ${transfer.to}`;
     });
 
     setTransferSentences(sentenceArray);
