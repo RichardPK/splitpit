@@ -13,16 +13,24 @@ const Form = ({ className }) => {
 
   const [values, setValues] = useState([
     { name: 'Richard', amount: '100' },
-    { name: 'Smasher', amount: '60' }
+    { name: 'Smasher', amount: '60' },
+    { name: 'Nuria', amount: '40' },
+    { name: 'Ali', amount: '0' },
+    { name: 'Andrew', amount: '0' }
   ]);
 
-  const [transferAmounts, setTransferAmounts] = useState([
+  const [mutableValues, setMutableValues] = useState([
     { name: 'Richard', amount: '100' },
-    { name: 'Smasher', amount: '60' }
+    { name: 'Smasher', amount: '60' },
+    { name: 'Nuria', amount: '40' },
+    { name: 'Ali', amount: '0' },
+    { name: 'Andrew', amount: '0' }
   ]);
+
+  const [transferAmounts, setTransferAmounts] = useState([{ from: '', to: '', amount: '' }]);
 
   useEffect(() => {
-    setTransferAmounts(values);
+    setMutableValues(mutableValues);
   }, [values]);
 
   const onInput = (value, type, index) => {
@@ -62,33 +70,38 @@ const Form = ({ className }) => {
   };
 
   const handleSplit = () => {
-    const transferAmountsCopy = [...transferAmounts];
+    const mutableValuesCopy = [...mutableValues];
+    let creditors = [];
+    let debtors = [];
+    let neutrals = [];
 
-    for (let value of transferAmountsCopy) {
+    for (let value of mutableValuesCopy) {
       value.amount = parseInt(value.amount);
     }
 
-    // THIS IS TOTAL SHIT (I think, maybe not):
-    // Start by adding all the amounts up, divide it by the number of people and then figure out how far away each person is.
-    // Then start distributing the difference to each person
+    let average = calcAverage(mutableValuesCopy);
 
-    //     transferAmountsCopy.forEach((value) => {
-    //       const currentValueIndex = transferAmountsCopy.indexOf(value);
-    //       const nextValueIndex = currentValueIndex + 1;
-    // tr
-    //       if (transferAmountsCopy[nextValueIndex]) {
-    //         let currentAmount = value.amount;
-    //         let nextAmount = transferAmountsCopy[nextValueIndex].amount;
-    //         if (currentAmount - nextAmount > 0) {
-    //           let difference = currentAmount - nextAmount;
-    //           nextAmount = nextAmount + difference;
-    //           debugger;
-    //         } else if (currentAmount - nextAmount < 0) {
-    //         }
-    //       }
-    //     });
+    for (let value of mutableValuesCopy) {
+      if (value.amount === average) {
+        neutrals.push(value);
+      } else if (value.amount < average) {
+        debtors.push(value);
+      } else if (value.amount > average) {
+        creditors.push(value);
+      }
+    }
 
-    // debugger;
+    debugger;
+  };
+
+  const calcAverage = (values) => {
+    let total = 0;
+
+    for (let value of values) {
+      total += value.amount;
+    }
+
+    return total / values.length;
   };
 
   const handleMinusClick = (index) => {
